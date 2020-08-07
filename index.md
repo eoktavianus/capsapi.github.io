@@ -1,37 +1,121 @@
-## Welcome to GitHub Pages
+# p4da-capstone-api
+This is Algoritma's Python for Data Analysis Capstone Project. This project aims to create a simple API to fetch data from Heroku Server. 
 
-You can use the [editor on GitHub](https://github.com/eoktavianus/capsapi.github.io/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+As a Data Scientist, we demand data to be accessible. And as a data owner, we are careful with our data. As the answer, data owner create an API for anyone who are granted access to the data to collect them. In this capstone project, we will create Flask Application as an API and deploy it to Heroku Web Hosting. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+We provide a brief guideline to create the API and how to Deploy in `Capstone Guideline.ipynb` using Bahasa Indonesia. 
 
-### Markdown
+You can check the rubrics on rubrics folder
+___
+## Dependencies : 
+- Pandas    (pip install pandas)
+- Flask     (pip install flask)
+- Gunicorn  (pip install gunicorn)
+___
+## Goal 
+- Create Flask API App
+- Deploy to Heroku
+- Build API Documentation of how your API works
+- Implements the data analysis and wrangling behind the works
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+___
+We have deployed a simple example on : https://capsapi.herokuapp.com
+Here's the list of its endpoints: 
+```
+1. /
+Base Endpoint, returning welcoming string value. 
 
-```markdown
-Syntax highlighted code block
+2. /data/get/<data_name> , method = GET
+Return full data <data_name> in JSON format. Currently available data are:
+    - books_c.csv
+    - pulsar_stars.csv 
+    
+3. /data/get/equal/<data_name>/<column>/<value> , method = GET
+Return all <data_name> where the value of column <column> is equal to <value>
 
-# Header 1
-## Header 2
-### Header 3
+4. /home
+Retunn static value, welcome greetings string value.
 
-- Bulleted
-- List
+5. /hello/<your_name>, method = GET
+Return greetings to <your_name> string value
 
-1. Numbered
-2. List
+6. /query?name=<name>&age=<age>,  method = GET
+Return value string Hello, <name>, you are <age> years old
 
-**Bold** and _Italic_ and `Code` text
+7. /form, method = GET, POST
+GET --> Return Blank Form to fill Name, Age and Button Submit
+SUBMIT --> Return value 
+        Your name is : <name>
+        Your age is : <age>
 
-[Link](url) and ![Image](src)
+8. /json, method = POST
+Return value from json file, Hello <name>, your age is <age> and your address is <address>
+
+9. /data/get/<data_name>,  method = GET
+Return all <data_name>
+
+10. /data/get/equal/form, method = GET, POST
+Return all data books_c.csv where average_rating between start and end input value 
+
+11. /data/getbyfileext/<data_name>,  method = GET
+Return all <data_name> from file .csv or return data customers in chinook.db
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+**no 12 - 15 for quest endpoint (2 statics and 1 dynamics)**
+```
+12. /question/form/, method = GET, POST
+Return all data books_c.csv according to selected question in combobox, where the options questions are:
+ question 1 : Top 5 Books berdasarkan Ratings count tertinggi
+ question 2 : Top 5 Books berdasarkan halaman terbanyak
 
-### Jekyll Themes
+13. /question/query, method = GET
+curl: https://capsapi.herokuapp.com/question/query?questopt=1
+Return all data books_c.csv according to "questopt" value given, where the value are:
+ 1 : Top 5 Books berdasarkan Ratings count tertinggi
+ 2 : Top 5 Books berdasarkan halaman terbanyak
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/eoktavianus/capsapi.github.io/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+14. /get/author, method = GET
+Return all Authors from books_c.csv
 
-### Support or Contact
+15. /get/englishversion, method = GET
+Return Total and List Book English Version from books_c.csv
+```
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+**Project Capstone EDA groupby DataFrame**
+```
+16. /eda/groupby', method = GET
+Return data Authors from books_c.csv with the highest # num_pages
+```
+
+**Project Capstone Take data from joining minimum of 4 table**
+```
+17. /eda/catfreq/sql/
+Return data Genre, Country from books_c.csv with the highest sell qty in Monday using sql
+```
+
+**Project Capstone Categorical operation & Frequencies analysis**
+```
+18. /eda/catfreq
+Return data Genre, Country from books_c.csv with the highest sell qty in Monday using pandas dataframe technique
+
+19. /get/data/table/<table_name>
+Return all data from <table_name> in chinook.db
+```
+
+**Project Capstone Datetime operation + Joining Table**
+```
+20. /data/join/date
+Return data invoices and detail items from multiple table in chinook.db
+
+```
+
+If you want to try it, you can access (copy-paste it) : 
+- https://capsapi.herokuapp.com/home
+- https://capsapi.herokuapp.com/data/get/books_c.csv
+- https://capsapi.herokuapp.com/data/get/pulsar_stars.csv
+- https://capsapi.herokuapp.com//data/getbyfileext/books_c.csv
+- https://capsapi.herokuapp.com//data/getbyfileext/chinook.db
+- https://capsapi.herokuapp.com/data/get/equal/books_c.csv/isbn/0439785960
+- https://capsapi.herokuapp.com/question/form
+- https://capsapi.herokuapp.com/question/query?questopt=1
+- and so on, just follow the endpoint's pattern
